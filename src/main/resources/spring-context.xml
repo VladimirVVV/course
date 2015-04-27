@@ -8,6 +8,7 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
+    <context:property-placeholder location="classpath*:dao-param.properties" />
 
     <bean id="viewService" class="com.courses.view.Print">
         <property name="calc" ref="addService"/>
@@ -16,8 +17,12 @@
         <property name="dao" ref="daoLayer"/>
     </bean>
     <bean id="daoLayer" class="com.courses.dao.ParametersDAO">
-            <property name="param1" value="1"/>
-            <property name="param2" value="2" />
+    <!--<context:property-placeholder properties-ref="dao-param.properties" />-->
+
+        <property name="param1" value="${dao.param1}" />
+        <property name="param2" value="${dao.param2}" />
+        <!--<property name="param1" value="1"/>-->
+            <!--<property name="param2" value="2" />-->
     </bean>
 
 </beans>
