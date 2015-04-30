@@ -8,21 +8,32 @@
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.1.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
-    <context:property-placeholder location="classpath*:dao-param.properties" />
+    <context:property-placeholder location="classpath*:jdbc-param.properties" />
+    <context:annotation-config/>
+    <tx:annotation-driven transaction-manager="txManager"/>
 
-    <bean id="viewService" class="com.courses.view.Print">
-        <property name="calc" ref="addService"/>
+    <bean id="phoneService" class="com.courses.phones.domain.PhoneService">
+        <constructor-arg ref="phoneDAO" />
     </bean>
-    <bean id="addService" class="com.courses.domain.Add">
-        <property name="dao" ref="daoLayer"/>
-    </bean>
-    <bean id="daoLayer" class="com.courses.dao.ParametersDAO">
-    <!--<context:property-placeholder properties-ref="dao-param.properties" />-->
 
-        <property name="param1" value="${dao.param1}" />
-        <property name="param2" value="${dao.param2}" />
-        <!--<property name="param1" value="1"/>-->
-            <!--<property name="param2" value="2" />-->
+    <bean id="phoneDAO" class="com.courses.phones.dao.PhoneDAO">
+        <constructor-arg ref="jdbcTemplate" />
     </bean>
+
+    <bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${db.driver}"/>
+        <property name="url" value="${db.url}"/>
+        <property name="username" value="${db.login}"/>
+        <property name="password" value="${db.pass}"/>
+    </bean>
+
+    <bean name="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
 
 </beans>
