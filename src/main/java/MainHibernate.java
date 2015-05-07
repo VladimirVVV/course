@@ -1,17 +1,16 @@
 import com.courses.phones.Phone;
 import com.courses.phones.domain.PhoneService;
-import com.courses.phones.domain.PhoneServiceImpl;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.List;
 
 /**
- * Created by vladimir on 24.04.2015.
+ * Created by vladimir.marchenko on 07.05.2015.
  */
-public class Main {
+public class MainHibernate {
     public static void main(String[] args) {
-        ApplicationContext ctx = new ClassPathXmlApplicationContext("spring-context.xml");
+        ApplicationContext ctx = new ClassPathXmlApplicationContext("spring-context-hibernate.xml");
         PhoneService service = ctx.getBean("phoneServiceImpl", PhoneService.class);
         init(service);
         List<Phone> phones = service.getAll();
@@ -36,5 +35,4 @@ public class Main {
         service.create("Nokia N7", 78);
         service.create("Motorola 77 ", 130);
         service.create("Nokia N5", 50);
-    }
-}
+    }}

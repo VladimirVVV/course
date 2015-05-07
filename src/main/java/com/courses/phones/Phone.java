@@ -1,13 +1,22 @@
 package com.courses.phones;
 
-import java.util.List;
+import javax.persistence.*;
+import java.io.Serializable;
 
 /**
  * Created by vladimir on 30.04.2015.
  */
-public class Phone {
+
+@Entity
+@Table(name = "phone")
+public class Phone implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "price")
     private Integer price;
 
     public Long getId() {

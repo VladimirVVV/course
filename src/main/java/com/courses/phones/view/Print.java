@@ -1,7 +1,5 @@
 package com.courses.phones.view;
 
-import com.courses.phones.domain.PhoneService;
-
 /**
  * Created by vladimir on 27.04.2015.
  */

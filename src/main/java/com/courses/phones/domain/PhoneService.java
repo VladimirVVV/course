@@ -1,50 +1,21 @@
 package com.courses.phones.domain;
 
 import com.courses.phones.Phone;
-import com.courses.phones.dao.PhoneDAO;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 /**
- * Created by vladimir on 27.04.2015.
+ * Created by vladimir on 06.05.2015.
  */
-public class PhoneService {
-    private PhoneDAO dao;
+public interface PhoneService {
+    Phone create(String name, Integer price);
 
-    public PhoneService() {}
-    public PhoneService(PhoneDAO dao) {
-        this.dao = dao;
-    }
+    Phone create(Phone phone);
 
-    public Phone create(String name, Integer price) {
-        Phone phone = new Phone();
-        phone.setName(name);
-        phone.setPrice(price);
+    Phone getPhoneBy(Long id);
 
-        return create(phone);
-    }
+    List<Phone> getAll();
 
-    @Transactional
-    public Phone create(Phone phone) {
-        return dao.add(phone);
-    }
-
-    @Transactional
-    public Phone getPhoneBy(Long id) {
-        return dao.getPhoneBy(id);
-    }
-
-    public List<Phone> getAll() {
-        return dao.getAll();
-    }
-
-    @Transactional
-    public void increasePrice(Long id, Integer dif) {
-        Phone phone = dao.getPhoneBy(id);
-        phone.setPrice(phone.getPrice() + dif);
-
-        dao.update(phone);
-    }
-
+    void increasePrice(Long id, Integer dif);
 }
