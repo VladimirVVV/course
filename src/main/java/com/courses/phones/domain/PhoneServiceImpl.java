@@ -17,6 +17,7 @@ public class PhoneServiceImpl implements PhoneService {
         this.dao = dao;
     }
 
+    @Transactional
     public Phone create(String name, Integer price) {
         Phone phone = new Phone();
         phone.setName(name);
