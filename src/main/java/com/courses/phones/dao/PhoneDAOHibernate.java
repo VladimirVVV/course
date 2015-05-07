@@ -23,9 +23,9 @@ public class PhoneDAOHibernate implements PhoneDAO {
         this(factory.openSession());
     }
 
-    public PhoneDAOHibernate() {
-        this.session = HibernateUtil.getSession();
-    }
+    public PhoneDAOHibernate() {}
+//        this.session = HibernateUtil.getSession();
+//    }
 
     public Phone getPhoneBy(Long id) {
         Phone phone = (Phone) session.get(Phone.class, id);
