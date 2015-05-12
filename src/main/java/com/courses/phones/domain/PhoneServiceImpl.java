@@ -36,6 +36,7 @@ public class PhoneServiceImpl implements PhoneService {
         return dao.getPhoneBy(id);
     }
 
+    @Transactional(readOnly = true)
     public List<Phone> getAll() {
         return dao.getAll();
     }
